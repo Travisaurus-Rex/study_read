@@ -1,12 +1,13 @@
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
-from app.routes import health
+from app.routes import health, tts
 from app.core.config import settings
 from app.db.session import engine
 from app.db.base import Base
 
 app = FastAPI(title=settings.app_name)
 app.include_router(health.router)
+app.include_router(tts.router)
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
