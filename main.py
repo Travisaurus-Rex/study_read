@@ -1,9 +1,10 @@
 from fastapi import FastAPI
 from app.routes import health
+from app.core.config import settings
 
-app = FastAPI()
+app = FastAPI(title=settings.app_name)
 app.include_router(health.router)
 
 @app.get("/")
 def read_root():
-    return{ "message": "Study read is working!"}
+    return{ "message": f"{settings.app_name} is running!"}
