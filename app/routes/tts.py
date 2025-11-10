@@ -17,3 +17,8 @@ async def list_tts_jobs(db: AsyncSession = Depends(get_db)):
         }
         for j in jobs
     ]
+
+@router.post("/")
+async def create_tts_job(text: str, voice_id: str | None, provider: str | None, db: AsyncSession = Depends(get_db)):
+    job = await tts_repo.create_tts_job(db, text, voice_id, provider)
+    return {"id": job.id, "text": job.text, "created_at": job.created_at}
