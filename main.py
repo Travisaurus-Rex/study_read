@@ -1,11 +1,9 @@
 from fastapi import FastAPI
+from app.routes import health
 
 app = FastAPI()
+app.include_router(health.router)
 
 @app.get("/")
 def read_root():
     return{ "message": "Study read is working!"}
-
-@app.get("/healthz")
-def healthz():
-    return{ "status": "ok"}
